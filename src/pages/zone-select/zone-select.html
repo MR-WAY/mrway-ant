@@ -4,10 +4,21 @@
       Выберите область доставки
     </div>
     <div class="header__icon">
-      <ion-icon name="location"></ion-icon>
+      <ion-icon name="navigate"></ion-icon>
     </div>
   </div>
   <div class="wrapper__container wrapper__container_center">
-    <div id="map" style="width: 600px; height: 400px"></div>
+    <div id="map" style="width: 100%; height: 450px"></div>
+    <div class="message">
+      <span *ngIf="isAreaSelected">Выбрана зона доставки </span>
+      {{selectedArea}}
+    </div>
+    <button
+      ion-button
+      *ngIf="isAreaSelected"
+      (click)="approveZone()"
+    >
+      Подтвердить
+    </button>
   </div>
 </div>

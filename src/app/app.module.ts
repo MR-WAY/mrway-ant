@@ -9,6 +9,9 @@ import { MyApp } from './app.component';
 import { StartPage } from "../pages/start/start";
 import { TimeRangePage } from "../pages/time-range/time-range";
 import { ZoneSelectPage } from "../pages/zone-select/zone-select";
+import { NavigatorPage } from "../pages/navigator/navigator";
+import { OrdersListPage } from "../pages/orders-list/orders-list";
+import { FinishPage } from "../pages/finish/finish";
 
 @NgModule({
   declarations: [
@@ -16,6 +19,9 @@ import { ZoneSelectPage } from "../pages/zone-select/zone-select";
     StartPage,
     TimeRangePage,
     ZoneSelectPage,
+    NavigatorPage,
+    OrdersListPage,
+    FinishPage,
   ],
   imports: [
     BrowserModule,
@@ -28,6 +34,9 @@ import { ZoneSelectPage } from "../pages/zone-select/zone-select";
     StartPage,
     TimeRangePage,
     ZoneSelectPage,
+    NavigatorPage,
+    OrdersListPage,
+    FinishPage,
   ],
   providers: [
     StatusBar,
