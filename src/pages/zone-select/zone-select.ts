@@ -21,7 +21,6 @@ export class ZoneSelectPage {
 
   // TODO Add real coordinates from Native
   ionViewDidEnter() {
-    const that = this;
     const init = () => {
       this.map = new ymaps.Map("map", {
         center: [55.6722, 37.6317],
@@ -68,13 +67,13 @@ export class ZoneSelectPage {
       });
 
       zoneFirst.events.add(['click'], () => {
-        that.selectZone('1');
+        this.selectZone('1');
       });
       zoneSecond.events.add(['click'], () => {
-        that.selectZone('2');
+        this.selectZone('2');
       });
       zoneThird.events.add(['click'], () => {
-        that.selectZone('3');
+        this.selectZone('3');
       });
 
       this.map.geoObjects
@@ -83,7 +82,7 @@ export class ZoneSelectPage {
         .add(zoneThird);
     };
 
-    if (this.map === null) {
+    if (this.map === null && ymaps) {
       ymaps.ready(init);
     }
   }

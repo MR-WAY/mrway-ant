@@ -28,6 +28,10 @@ export class OrdersListPage {
           time: 3,
           price: 150,
           address: '3-й Нагатинский пр-д, 5к1',
+          shopCoordinates: [
+            55.6722,
+            37.6317
+          ],
           shopTitle: 'Умка',
         });
       });
@@ -37,9 +41,11 @@ export class OrdersListPage {
   // TODO Add server request
   requestTakeOrder(id) {
     const item = this.orders.find(_order => _order.id === id);
-    this.navCtrl.push(NavigatorPage, {
+    this.navCtrl.setRoot(NavigatorPage, {
+      type: 'toStore',
       address: item.address,
       shopTitle: item.shopTitle,
+      shopCoordinates: item.shopCoordinates
     });
   }
 

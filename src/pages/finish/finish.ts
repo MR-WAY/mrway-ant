@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the FinishPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { OrdersListPage } from "../orders-list/orders-list";
 
 @IonicPage()
 @Component({
@@ -14,12 +8,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'finish.html',
 })
 export class FinishPage {
+  rate: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FinishPage');
+  finishOrder() {
+    this.navCtrl.setRoot(OrdersListPage);
   }
 
 }

@@ -1,18 +1,36 @@
-<!--
-  Generated template for the NavigatorPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>navigator</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+<div class="wrapper">
+  <div class="wrapper__header header">
+    <div
+      class="header__title"
+      *ngIf="type === 'toStore'"
+    >
+      Доставка из магазина {{shopTitle}}
+    </div>
+    <div
+      class="header__title"
+      *ngIf="type === 'toClient'"
+    >
+      Доставка клиенту {{clientName}}
+    </div>
+    <div class="header__icon">
+      <ion-icon name="navigate"></ion-icon>
+    </div>
+  </div>
+  <div class="wrapper__container wrapper__container_center">
+    <div id="navigatorMap" style="width: 100%; height: 450px"></div>
+    <button
+      ion-button
+      *ngIf="type === 'toStore'"
+      (click)="checkInStore()"
+    >
+      Я забрал заказ
+    </button>
+    <button
+      ion-button
+      *ngIf="type === 'toClient'"
+      (click)="checkInClient()"
+    >
+      Я передал заказ клиенту
+    </button>
+  </div>
+</div>
