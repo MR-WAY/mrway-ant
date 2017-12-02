@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { TimeRangePage } from "../time-range/time-range";
-import { IonicPage, NavController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { UptimeService } from "../../services/uptime.service";
+import { ZoneSelectPage } from "../zone-select/zone-select";
 
-@IonicPage()
 @Component({
   selector: 'page-start',
   templateUrl: 'start.html',
@@ -48,7 +47,7 @@ export class StartPage {
   requestStart() {
     this.uptimeService.setUptime(this.selectedRange[0], this.selectedRange[1]);
     this.navCtrl
-      .push('ZoneSelect')
+      .push(ZoneSelectPage)
       .then(result => { console.log(result) })
       .catch(error => { console.error(error) });
   }
