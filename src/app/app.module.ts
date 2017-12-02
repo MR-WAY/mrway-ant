@@ -8,18 +8,20 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 
 import { MyApp } from './app.component';
 import { StartPage } from "../pages/start/start";
-import { TimeRangePage } from "../pages/time-range/time-range";
 import { ZoneSelectPage } from "../pages/zone-select/zone-select";
 import { NavigatorPage } from "../pages/navigator/navigator";
 import { OrdersListPage } from "../pages/orders-list/orders-list";
 import { FinishPage } from "../pages/finish/finish";
+
+import { UptimeService } from "../services/uptime.service";
+import { MapService } from "../services/map.service";
+import { RatingService } from "../services/rating.service";
 
 
 @NgModule({
   declarations: [
     MyApp,
     StartPage,
-    TimeRangePage,
     ZoneSelectPage,
     NavigatorPage,
     OrdersListPage,
@@ -35,7 +37,6 @@ import { FinishPage } from "../pages/finish/finish";
   entryComponents: [
     MyApp,
     StartPage,
-    TimeRangePage,
     ZoneSelectPage,
     NavigatorPage,
     OrdersListPage,
@@ -44,7 +45,10 @@ import { FinishPage } from "../pages/finish/finish";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UptimeService,
+    MapService,
+    RatingService,
   ]
 })
 export class AppModule {}

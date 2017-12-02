@@ -8,6 +8,27 @@
     </div>
   </div>
   <div class="wrapper__container wrapper__container_center">
-    <button ion-button (click)="requestStart()">Старт</button>
+    <div class="message">
+      <span class="message__light">Время участия</span><br />
+      с {{selectedRange[0]}}:00 по {{selectedRange[1]}}:00<br />
+      <span class="message__note">
+        В это время вы будете получать<br />
+        уведомления о новых заказах<br />
+        в выбранном квадрате</span>
+    </div>
+    <div class="slider">
+      <nouislider
+        [config]="sliderConfig"
+        [(ngModel)]="selectedRange"
+      ></nouislider>
+    </div>
+    <button
+      ion-button
+      color="secondary"
+      round
+      (click)="requestStart()"
+    >
+      Выбрать зону доставки
+    </button>
   </div>
 </div>

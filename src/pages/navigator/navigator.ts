@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { FinishPage } from "../finish/finish";
 
 declare const ymaps: any;
 
-@IonicPage()
 @Component({
   selector: 'page-navigator',
   templateUrl: 'navigator.html',

@@ -1,15 +1,14 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { NavigatorPage } from "../navigator/navigator";
 
-@IonicPage()
 @Component({
   selector: 'page-orders-list',
   templateUrl: 'orders-list.html',
 })
 export class OrdersListPage {
   areaNumber: number = null;
-  orders: Array = null;
+  orders: Array<any> = null;
   zone: NgZone = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {

@@ -1,17 +1,10 @@
-<div class="wrapper">
-  <div class="wrapper__header header">
-    <div class="header__title">
-      Завершение заказа
-    </div>
-    <div class="header__icon">
-      <ion-icon name="checkmark-circle-outline"></ion-icon>
-    </div>
-  </div>
-  <div class="wrapper__content">
-    <div class="message">
-      Заказ успешно доставлен!
-    </div>
-    <div class="message">
+<div class="wrapper wrapper_finish">
+  <div class="wrapper__container wrapper__container_center">
+    <img
+      class="money"
+      src="assets/imgs/money.png"
+    />
+    <div class="message message_finish">
       Оцените клиента
     </div>
     <rating
@@ -24,7 +17,10 @@
       nullable="false">
     </rating>
     <button
+      class="map"
       ion-button
+      color="secondary"
+      round
       (click)="finishOrder()"
     >
       Завершить
