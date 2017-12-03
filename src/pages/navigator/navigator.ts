@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { FinishPage } from "../finish/finish";
+import { HttpClient } from "@angular/common/http";
 
 declare const ymaps: any;
 
@@ -9,7 +10,8 @@ declare const ymaps: any;
   templateUrl: 'navigator.html',
 })
 export class NavigatorPage {
-  shopCoordinates: Array<number>;
+  id: string;
+  storeCoordinates: Array<number>;
   clientCoordinates: Array<number>;
   antCoordinates: Array<number>;
   type: string;
@@ -18,11 +20,13 @@ export class NavigatorPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private http: HttpClient,
   ) {
     this.type = navParams.get('type');
+    this.id = navParams.get('id');
     if (this.type == 'toStore') {
-      this.shopCoordinates = navParams.get('shopCoordinates');
+      this.storeCoordinates = navParams.get('storeCoordinates');
     } else if (this.type === 'toClient') {
       this.clientCoordinates = navParams.get('clientCoordinates');
     }
@@ -43,7 +47,7 @@ export class NavigatorPage {
       const multiRoute = new ymaps.multiRouter.MultiRoute({
         referencePoints: [
           this.antCoordinates,
-          (this.type === 'toStore') ? this.shopCoordinates : this.clientCoordinates,
+          (this.type === 'toStore') ? this.storeCoordinates : this.clientCoordinates,
         ],
         params: {
           routingMode: 'pedestrian'
@@ -67,30 +71,71 @@ export class NavigatorPage {
     ]
   }
 
-  // TODO Add QR scan
   checkInStore() {
     const alert = this.alertController.create({
-      title: 'Сканирование QR',
-      subTitle: 'Тут мы тип сосканировали успешно QR с терминала',
+      title: 'Подтверждение',
+      subTitle: 'Введите четырехзначный код с экрана заказа на смарт терминале',
+      inputs: [
+        {
+          name: 'secureCode',
+          placeholder: '1234',
+          type: 'number'
+        }
+      ],
       buttons: [
         {
           text: 'Ок',
-          handler: () => {
-            this.navCtrl.setRoot(NavigatorPage, {
-              type: 'toClient',
-              clientCoordinates: [
-                55.6762,
-                37.6317
-              ]
-            });
+          handler: ({ secureCode }) => {
+            this.checkSecureCode(secureCode);
           }
-        }
+        },
+        {
+          text: 'Отмена',
+          role: 'cancel'
+        },
       ]
     });
     alert.present();
   }
 
+  checkSecureCode(secureCode) {
+    this.http
+      .post(`/api/Courier/Order/TakeAway/${this.id}?code=${secureCode}`, {})
+      .subscribe(
+        () => {
+          this.goToClient();
+        },
+        () => {
+          alert('Что-то не так...');
+        }
+      );
+  }
+
+  goToClient() {
+    this.navCtrl.setRoot(NavigatorPage, {
+      type: 'toClient',
+      id: this.id,
+      clientCoordinates: [
+        55.6762,
+        37.6317
+      ]
+    });
+  }
+
   checkInClient() {
+    this.http
+      .post(`/api/Courier/Order/Delivery/${this.id}`, {})
+      .subscribe(
+        () => {
+          this.goToFinish();
+        },
+        () => {
+          alert('Что-то не так...');
+        }
+      );
+  }
+
+  goToFinish() {
     this.navCtrl.setRoot(FinishPage);
   }
 

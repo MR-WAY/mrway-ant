@@ -11,6 +11,7 @@ export class OrdersListPage {
   areaNumber: number = null;
   orders: Array<any> = null;
   zone: NgZone = null;
+  requestFailed: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -23,20 +24,27 @@ export class OrdersListPage {
 
   // TODO Replace by server request
   ionViewDidLoad() {
+    this.fetchOrders();
+  }
+
+  fetchOrders() {
     this.http
       .get('/api/Courier/Order')
       .subscribe(
-        data => this.processData(data),
-        error => console.error(error)
+        (data) => {
+          this.requestFailed = false;
+          this.processData(data);
+        },
+        error => this.requestFailed = true
       );
   }
 
   processData(data) {
-    const mutatedData = data.map(_item => ({
+    this.orders = data.map(_item => ({
       id: _item.id,
       orderStatus: _item.orderStatus,
       deliveryStatus: _item.deliveryStatus,
-      number: _item.id.split('').filter(_char => _char.match(/[0-9]/)).join('').slice(0, 5),
+      number: _item.id.split('-')[0],
       clientCoordinates: [
         _item.latitude,
         _item.longitude,
@@ -47,24 +55,30 @@ export class OrdersListPage {
       ],
       distance: Math.floor(Math.random() * 200) / 100,
     }));
-    this.orders = mutatedData;
-      // .filter(_item => _item.deliveryStatus !== 'accepted');
   }
 
-  // TODO Add server request
   requestTakeOrder(id) {
-    this.http
-      .post(`api/Courier/Order/Accept/${id}`, {})
-      .subscribe(
-        () => {
-          const item = this.orders.find(_order => _order.id === id);
-          this.navCtrl.setRoot(NavigatorPage, {
-            type: 'toStore',
-            shopCoordinates: item.shopCoordinates
-          });
-        }
-      );
+    const item = this.orders.find(_order => _order.id === id);
+    if (item.deliveryStatus === 'accepted') {
+      this.goToOrder(item);
+    } else {
+      this.http
+        .post(`api/Courier/Order/Accept/${id}`, {})
+        .subscribe(
+          () => {
+            this.goToOrder(item);
+          }
+        );
+    }
+  }
 
+  goToOrder(item) {
+    this.navCtrl.setRoot(NavigatorPage, {
+      type: 'toStore',
+      storeCoordinates: item.storeCoordinates,
+      clientCoordinates: item.clientCoordinates,
+      id: item.id,
+    });
   }
 
 }

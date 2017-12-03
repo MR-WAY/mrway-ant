@@ -7,8 +7,17 @@
       <ion-icon name="list"></ion-icon>
     </div>
   </div>
-  <div class="wrapper__container">
-    <div class="message" *ngIf="!orders">
+  <div class="wrapper__container wrapper__container_top_center">
+    <button
+      ion-button
+      round
+      color="secondary"
+      *ngIf="requestFailed || (orders && orders.length === 0)"
+      (click)="fetchOrders()"
+    >
+      Обновить
+    </button>
+    <div class="message" *ngIf="!orders && !requestFailed">
       Ожидаем заказы
     </div>
     <div *ngIf="orders" class="order-list">
@@ -20,10 +29,17 @@
             {{order.distance}} км.
           </div>
         </div>
-        <button class="order__button" (click)="requestTakeOrder(order.id)">
+        <button
+          class="order__button"
+          *ngIf="order.deliveryStatus !== 'accepted'"
+          (click)="requestTakeOrder(order.id)"
+        >
           Принять
         </button>
       </div>
+    </div>
+    <div class="message" *ngIf="requestFailed">
+      Не удалось загрузить заказы : (
     </div>
   </div>
 </div>
