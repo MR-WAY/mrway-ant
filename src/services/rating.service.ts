@@ -5,6 +5,5 @@ export class RatingService {
   constructor() {}
 
   sendRating(id: string, value: number) {
-    console.log('Mocking rating sending...');
   }
 }
