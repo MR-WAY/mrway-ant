@@ -7,20 +7,23 @@
       <ion-icon name="list"></ion-icon>
     </div>
   </div>
-  <div class="wrapper_container">
+  <div class="wrapper__container">
     <div class="message" *ngIf="!orders">
       Ожидаем заказы
     </div>
-    <ion-list *ngIf="orders">
-      <ion-item *ngFor="let order of orders" class="order">
+    <div *ngIf="orders" class="order-list">
+      <div *ngFor="let order of orders" class="order">
         <div class="order__desc">
-          <div class="order__name">#{{order.number}}</div>
-          <div class="order__price">{{order.distance}}</div>
+          <div class="order__name">Доставка #{{order.number}}</div>
+          <div class="order__distance">
+            <img src="assets/imgs/location-icon.png" class="order__icon">
+            {{order.distance}} км.
+          </div>
         </div>
         <button class="order__button" (click)="requestTakeOrder(order.id)">
           Принять
         </button>
-      </ion-item>
-    </ion-list>
+      </div>
+    </div>
   </div>
 </div>
