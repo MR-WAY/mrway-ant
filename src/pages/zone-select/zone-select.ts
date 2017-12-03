@@ -21,7 +21,7 @@ export class ZoneSelectPage {
 
   ngOnInit() {
     try {
-      const foundedArea = localStorage.getItem('mrway_area');
+      const foundedArea = sessionStorage.getItem('mrway_area');
       if (foundedArea) {
         this.selectedArea = foundedArea;
         this.approveZone();
@@ -59,7 +59,7 @@ export class ZoneSelectPage {
 
   // TODO Add server request
   approveZone() {
-    localStorage.setItem('mrway_area', this.selectedArea);
+    sessionStorage.setItem('mrway_area', this.selectedArea);
     this.navCtrl.push(OrdersListPage, {
       area: this.selectedArea,
     });
