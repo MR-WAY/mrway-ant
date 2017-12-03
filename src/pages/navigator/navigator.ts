@@ -66,9 +66,9 @@ export class NavigatorPage {
 
   updateAntCoordinates() {
     this.antCoordinates = [
-      55.6702,
-      37.6327
-    ]
+      55.6722,
+      37.6317
+    ];
   }
 
   checkInStore() {
