@@ -104,8 +104,12 @@
   }
 
   &__button {
-    width: 50px;
+    width: 80px;
     height: 100%;
+
+    font-size: 30px;
+    color: #4cf758;
+    font-weight: bold;
 
     flex-shrink: 0;
   }

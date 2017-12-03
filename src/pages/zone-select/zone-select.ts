@@ -3,8 +3,6 @@ import { NavController } from 'ionic-angular';
 import { OrdersListPage } from "../orders-list/orders-list";
 import { MapService } from "../../services/map.service";
 
-// declare const ymaps: any;
-
 @Component({
   selector: 'page-zone-select',
   templateUrl: 'zone-select.html',
@@ -58,7 +56,7 @@ export class ZoneSelectPage {
       });
     };
 
-    init();
+    MapService.checkAndInit(this.map, init);
   }
 
   @Input()

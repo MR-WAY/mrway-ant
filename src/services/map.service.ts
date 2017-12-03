@@ -6,6 +6,16 @@ declare const ymaps: any;
 export class MapService {
   constructor() {}
 
+  static checkAndInit(map: any, callback) {
+    try {
+      if (map === null && ymaps) {
+        callback();
+      }
+    } catch(error) {
+      alert('Что-то не так с Яндекс Картами');
+    }
+  }
+
   static drawMap(id: string, centerCoordinates: Array<number>):any {
     return new ymaps.Map(id, {
       center: centerCoordinates,
