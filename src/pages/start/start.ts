@@ -32,6 +32,13 @@ export class StartPage {
   }
 
   ngOnInit() {
+    try {
+      const foundedRange = JSON.parse(localStorage.getItem('mrway_uptime'));
+      if (foundedRange) {
+        this.selectedRange = foundedRange;
+        this.requestStart();
+      }
+    } catch (error) {}
     this.updateSliderConfig();
   }
 
@@ -45,6 +52,7 @@ export class StartPage {
 
   // TODO add server request
   requestStart() {
+    localStorage.setItem('mrway_uptime', JSON.stringify(this.selectedRange));
     this.uptimeService.setUptime(
       this.selectedRange[0],
       this.selectedRange[1]

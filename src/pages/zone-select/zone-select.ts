@@ -19,6 +19,16 @@ export class ZoneSelectPage {
     this.zone = new NgZone({ enableLongStackTrace: false });
   }
 
+  ngOnInit() {
+    try {
+      const foundedArea = localStorage.getItem('mrway_area');
+      if (foundedArea) {
+        this.selectedArea = foundedArea;
+        this.approveZone();
+      }
+    } catch (error) {}
+  }
+
   // TODO Add real coordinates from Native
   ionViewDidEnter() {
     const init = () => {
@@ -69,6 +79,7 @@ export class ZoneSelectPage {
 
   // TODO Add server request
   approveZone() {
+    localStorage.setItem('mrway_area', this.selectedArea);
     this.navCtrl.push(OrdersListPage, {
       area: this.selectedArea,
     });

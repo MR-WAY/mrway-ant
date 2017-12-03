@@ -9,7 +9,7 @@ export class MapService {
   static checkAndInit(map: any, callback) {
     try {
       if (map === null && ymaps) {
-        callback();
+        ymaps.ready(callback);
       }
     } catch(error) {
       alert('Что-то не так с Яндекс Картами');
