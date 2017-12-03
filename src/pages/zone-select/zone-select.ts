@@ -38,31 +38,11 @@ export class ZoneSelectPage {
         .drawRectangle(
           this.map,
           [55.6712, 37.6297],
-          [55.6732, 37.6337],
-          '#0000FF',
-        );
-      const zoneSecond = MapService
-        .drawRectangle(
-          this.map,
-          [55.6732, 37.6297],
-          [55.6762, 37.6367],
-          '#25f052',
-        );
-      const zoneThird = MapService
-        .drawRectangle(
-          this.map,
-          [55.6763, 37.6287],
           [55.6792, 37.6370],
-          '#9e15f0',
+          '#0000FF',
         );
       zoneFirst.events.add(['click'], () => {
         this.selectZone('1');
-      });
-      zoneSecond.events.add(['click'], () => {
-        this.selectZone('2');
-      });
-      zoneThird.events.add(['click'], () => {
-        this.selectZone('3');
       });
     };
 

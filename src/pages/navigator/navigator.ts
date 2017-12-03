@@ -100,7 +100,7 @@ export class NavigatorPage {
 
   checkSecureCode(secureCode) {
     this.http
-      .post(`/api/Courier/Order/TakeAway/${this.id}?code=${secureCode}`, {})
+      .post(`http://178.62.241.56/api/Courier/Order/TakeAway/${this.id}?code=${secureCode}`, {})
       .subscribe(
         () => {
           this.goToClient();
@@ -124,7 +124,7 @@ export class NavigatorPage {
 
   checkInClient() {
     this.http
-      .post(`/api/Courier/Order/Delivery/${this.id}`, {})
+      .post(`http://178.62.241.56/api/Courier/Order/Delivery/${this.id}`, {})
       .subscribe(
         () => {
           this.goToFinish();

@@ -29,7 +29,7 @@ export class OrdersListPage {
 
   fetchOrders() {
     this.http
-      .get('/api/Courier/Order')
+      .get('http://178.62.241.56/api/Courier/Order')
       .subscribe(
         (data) => {
           this.requestFailed = false;
@@ -65,7 +65,7 @@ export class OrdersListPage {
       this.goToOrder(item);
     } else {
       this.http
-        .post(`api/Courier/Order/Accept/${id}`, {})
+        .post(`http://178.62.241.56/api/Courier/Order/Accept/${id}`, {})
         .subscribe(
           () => {
             this.goToOrder(item);
