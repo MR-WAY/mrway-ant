@@ -17,7 +17,7 @@
     >
       Обновить
     </button>
-    <div class="message" *ngIf="!orders && !requestFailed">
+    <div class="message" *ngIf="(!orders && !requestFailed) || (orders && orders.length === 0)">
       Ожидаем заказы
     </div>
     <div *ngIf="orders" class="order-list">

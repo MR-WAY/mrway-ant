@@ -40,21 +40,23 @@ export class OrdersListPage {
   }
 
   processData(data) {
-    this.orders = data.map(_item => ({
-      id: _item.id,
-      orderStatus: _item.orderStatus,
-      deliveryStatus: _item.deliveryStatus,
-      number: _item.id.split('-')[0],
-      clientCoordinates: [
-        _item.latitude,
-        _item.longitude,
-      ],
-      storeCoordinates: [
-        _item.store.latitude,
-        _item.store.longitude
-      ],
-      distance: Math.floor(Math.random() * 200) / 100,
-    }));
+    this.orders = data
+      .map(_item => ({
+        id: _item.id,
+        orderStatus: _item.orderStatus,
+        deliveryStatus: _item.deliveryStatus,
+        number: _item.id.split('-')[0],
+        clientCoordinates: [
+          _item.latitude,
+          _item.longitude,
+        ],
+        storeCoordinates: [
+          _item.store.latitude,
+          _item.store.longitude
+        ],
+        distance: Math.floor(Math.random() * 200) / 100,
+      }))
+    .filter(_item => _item.deliveryStatus !== 'delivered');
   }
 
   requestTakeOrder(id) {
