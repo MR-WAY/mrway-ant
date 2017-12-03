@@ -48,17 +48,23 @@ export class OrdersListPage {
       distance: Math.floor(Math.random() * 200) / 100,
     }));
     this.orders = mutatedData;
+      // .filter(_item => _item.deliveryStatus !== 'accepted');
   }
 
   // TODO Add server request
   requestTakeOrder(id) {
-    const item = this.orders.find(_order => _order.id === id);
-    this.navCtrl.setRoot(NavigatorPage, {
-      type: 'toStore',
-      address: item.address,
-      shopTitle: item.shopTitle,
-      shopCoordinates: item.shopCoordinates
-    });
+    this.http
+      .post(`api/Courier/Order/Accept/${id}`, {})
+      .subscribe(
+        () => {
+          const item = this.orders.find(_order => _order.id === id);
+          this.navCtrl.setRoot(NavigatorPage, {
+            type: 'toStore',
+            shopCoordinates: item.shopCoordinates
+          });
+        }
+      );
+
   }
 
 }

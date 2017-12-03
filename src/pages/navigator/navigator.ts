@@ -9,9 +9,6 @@ declare const ymaps: any;
   templateUrl: 'navigator.html',
 })
 export class NavigatorPage {
-  address: string;
-  shopTitle: string;
-  clientName: string;
   shopCoordinates: Array<number>;
   clientCoordinates: Array<number>;
   antCoordinates: Array<number>;
@@ -24,12 +21,9 @@ export class NavigatorPage {
     public alertController: AlertController
   ) {
     this.type = navParams.get('type');
-    this.address = navParams.get('address');
     if (this.type == 'toStore') {
-      this.shopTitle = navParams.get('shopTitle');
       this.shopCoordinates = navParams.get('shopCoordinates');
     } else if (this.type === 'toClient') {
-      this.clientName = navParams.get('clientName');
       this.clientCoordinates = navParams.get('clientCoordinates');
     }
     this.updateAntCoordinates();
