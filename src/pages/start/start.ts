@@ -45,10 +45,11 @@ export class StartPage {
 
   // TODO add server request
   requestStart() {
-    this.uptimeService.setUptime(this.selectedRange[0], this.selectedRange[1]);
+    this.uptimeService.setUptime(
+      this.selectedRange[0],
+      this.selectedRange[1]
+    );
     this.navCtrl
-      .push(ZoneSelectPage)
-      .then(result => { console.log(result) })
-      .catch(error => { console.error(error) });
+      .push(ZoneSelectPage);
   }
 }

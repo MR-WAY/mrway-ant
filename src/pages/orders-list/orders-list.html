@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="wrapper__header header">
     <div class="header__title">
-      Список заказов зоне доставки {{areaNumber}}
+      Список заказов
     </div>
     <div class="header__icon">
       <ion-icon name="list"></ion-icon>
@@ -14,12 +14,11 @@
     <ion-list *ngIf="orders">
       <ion-item *ngFor="let order of orders" class="order">
         <div class="order__desc">
-          <div class="order__name">{{order.name}}</div>
-          <div class="order__time">{{order.time}} минуты</div>
-          <div class="order__price">{{order.price}} ₽</div>
+          <div class="order__name">#{{order.number}}</div>
+          <div class="order__price">{{order.distance}}</div>
         </div>
         <button class="order__button" (click)="requestTakeOrder(order.id)">
-          <ion-icon name="checkmark"></ion-icon>
+          Принять
         </button>
       </ion-item>
     </ion-list>

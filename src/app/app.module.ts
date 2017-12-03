@@ -16,7 +16,8 @@ import { FinishPage } from "../pages/finish/finish";
 import { UptimeService } from "../services/uptime.service";
 import { MapService } from "../services/map.service";
 import { RatingService } from "../services/rating.service";
-
+import { HttpClientModule } from "@angular/common/http";
+import { ApiService } from "../services/api.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { RatingService } from "../services/rating.service";
     BrowserModule,
     IonicModule.forRoot(MyApp),
     NouisliderModule,
-    Ionic2RatingModule
+    Ionic2RatingModule,
+    HttpClientModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -49,6 +51,7 @@ import { RatingService } from "../services/rating.service";
     UptimeService,
     MapService,
     RatingService,
+    ApiService,
   ]
 })
 export class AppModule {}
